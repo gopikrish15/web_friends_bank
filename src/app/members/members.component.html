@@ -1,0 +1,146 @@
+<div class="page-header page-header_compress page-header-light shadow">
+    <div class="page-header-content d-lg-flex pt-2">
+        <div class="d-flex mx-2">
+            <div class="breadcrumb"><a href="/" class="breadcrumb-item"><i class="fa-solid fa-house"></i></a><span
+                    class="breadcrumb-item">Members</span>
+            </div>
+        </div>
+    </div>
+    <div class="page-header-content d-lg-flex border-top py-2 mx-2">
+        <div class="d-flex">
+            <h4 class="page-title mb-0"><span class="fw-normal">Members</span></h4>
+        </div>
+        <button type="button" class="btn btn-primary ms-auto me-2" (click)="openCreateModal(content)"><i
+                class="fa fa-plus"></i>Add</button>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+
+
+<div class="row px-3 mt-4">
+    <div class="col">
+        <div class="card">
+            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                <div class="datatable-scroll">
+                    <table class="table datatable-html no-footer" id="DataTables_Table_0"
+                        aria-describedby="DataTables_Table_0_info">
+                        <thead>
+                            <tr>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1">Name
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" aria-label="Position: activate to sort column ascending">Mobile
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" aria-label="Age: activate to sort column ascending">Email</th>
+                                <th class="sorting sorting_desc" tabindex="0" aria-controls="DataTables_Table_0"
+                                    rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending"
+                                    aria-sort="descending">Plan</th>
+                                <th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="Actions"
+                                    style="width: 100px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let table of tableDataList; let i=index">
+                            <tr>
+                                <td class="">
+                                    <div class="media-chat-item hstack align-items-start gap-3">
+                                        <div class="align-self-center">
+                                            <span class="fw-semibold">{{table.first_name}}
+                                                {{table.last_name}}</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">{{table.mobile}}</td>
+                                <td class="">{{table.email}}</td>
+                                <td class="">{{table.plan}}</td>
+                                <td class="text-center">
+                                    <div class="btn-group">
+                                        <button style="border-radius: 0.4rem;" type="button"
+                                             class="btn btn-primary me-2"><i
+                                                class="ph-fill ph-pencil-simple"></i></button>
+                                        <button style="border-radius: 0.4rem;" 
+                                            type="button" class="btn btn-info me-2"><i
+                                                class="ph-fill ph-eye"></i></button>
+                                        <button data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                             type="button" class="btn btn-danger"><i
+                                                class="ph-fill ph-trash"></i></button>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="datatable-footer">
+                    <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">
+                        Showing
+                        {{page}} to
+                        {{length}} of {{totalCount}}
+                        entries</div>
+                    <pagination class="paginations d-flex justify-content-center ms-auto p-2 custom-pagination"
+                        [totalItems]="totalCount" (pageChanged)="loadPage($event)" [itemsPerPage]="limit"
+                        [rotate]="" [boundaryLinks]="true" previousText="&lsaquo;" nextText="&rsaquo;"
+                        firstText="&laquo;" lastText="&raquo;" [maxSize]="limit" [(ngModel)]="currentPage"></pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form #memberForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="row mb-2">
+                <div class="col-md-6">
+                    <label class="form-label" for="first_name">First Name<span style="color: red;">*</span></label>
+                    <input name="first_name" type="text" [(ngModel)]="formData.first_name" class="form-control"
+                        id="first_name" #first_name="ngModel" placeholder="First Name" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="last_name">Last Name</label>
+                    <input name="last_name" type="text" [(ngModel)]="formData.last_name" class="form-control"
+                        id="last_name" #last_name="ngModel" placeholder="Last Name" required>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-6">
+                    <label class="form-label" for="first_name">Email<span style="color: red;">*</span></label>
+                    <input name="email" type="text" [(ngModel)]="formData.email" class="form-control" id="first_name"
+                        #email="ngModel" placeholder="Email" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="first_name">Mobile Number<span style="color: red;">*</span></label>
+                    <input name="email" type="text" [(ngModel)]="formData.mobile" class="form-control" id="first_name"
+                        #mobile="ngModel" placeholder="Mobile" required>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-6">
+                    <label class="form-label" for="date_of_birth">Date of Birth<span
+                            style="color: red;">*</span></label>
+                    <input name="date_of_birth" (focus)="onDateFocus($event)" (keydown)="onDateKeyDown($event)"
+                        type="date" [(ngModel)]="formData.date_of_birth" [max]="now" class="form-control"
+                        id="date_of_birth" #date_of_birth="ngModel" placeholder="Date of Birth" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="first_name">Plan<span style="color: red;">*</span></label>
+                    <input name="email" type="text" [(ngModel)]="formData.plan" class="form-control" id="first_name"
+                        #plan="ngModel" placeholder="Plan" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" (click)="closeModal()">Close</button>
+                <button type="submit" class="btn btn-outline-dark" (click)="modal.close">Create</button>
+            </div>
+        </form>
+
+    </div>
+
+</ng-template>

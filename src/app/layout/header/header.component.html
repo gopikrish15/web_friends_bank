@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark px-2">
+  <div class="side-nav-button p-2 me-3 text-light" (click)="sideNavToggle()">
+      <i class="fa-solid fa-bars"></i>
+  </div>
+  <a class="navbar-brand px-4" style="color: honeydew;" href="#">Friends Bank</a>
+  <div class="navbar-collapse">
+      <ul class="navbar-nav me-auto">
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                  Menu 1
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                  <li><a class="dropdown-item" href="#">Child 1</a></li>
+                  <li><a class="dropdown-item" href="#">Child 2</a></li>
+                  <li><a class="dropdown-item" href="#">Child 3</a></li>
+              </ul>
+          </li>
+      </ul>
+  </div>
+  <form class="d-flex me-5">
+      <input class="form-control me-2" type="search" placeholder="search">
+      <button class="btn btn-outline-light" type="submit">Search</button>
+  </form>
+  <div class="profile-logo dropstart">
+      <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
+          Krish
+      </button>
+      <ul class="dropdown-menu dropdown-menu-dark">
+          <li><a class="dropdown-item">Sign up</a></li>
+          <li><a class="dropdown-item">Log In</a></li>
+          <li><a class="dropdown-item">Your Profile</a></li>
+          <li><a class="dropdown-item">Log out</a></li>
+      </ul>
+  </div>
+</nav>

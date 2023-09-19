@@ -1,0 +1,209 @@
+
+  /* You can add global styles to this file, and also import other style files */
+app-root {
+	display: flex;
+	flex-grow: 1;
+}
+
+app-login {
+	display: flex;
+	flex-grow: 1;
+}
+
+app-main {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
+app-navbar {
+	display: flex;
+	
+}
+
+app-dashboard {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
+app-profile {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
+app-error {
+	display: flex;
+	flex-grow: 1;
+	flex-direction: column;
+}
+
+app-forbidden {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
+app-signup {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
+app-members {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
+app-forgot-pwd {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+app-create-it-filings {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
+app-it-filings {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
+app-settings {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
+app-staff {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+app-create-staff{
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+app-view-staff{
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+app-create-customer{
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+app-view-customer{
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+app-create-setting{
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+app-notification{
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+app-day-to-day-it-filing{
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+.col{
+	width: 20%;
+}
+
+.align-header{
+	margin-left: 1rem;
+}
+.bg-gray{
+	background-color: rgb(181 181 181);
+}
+
+
+.cursor_pointer {
+	cursor: pointer;
+}
+.multiselect-dropdown .dropdown-btn {
+	padding: 8px 12px !important;
+}
+
+
+/* Accordian */
+
+.filter{
+    border-radius: 0.5rem;
+    width: -webkit-fill-available;
+    background: #9b9b9b;
+}
+.input_width{
+	width: -webkit-fill-available !important;
+}
+.accordion-body{
+	background-color: white;
+}
+
+.md-drppicker.drops-down-auto.ltr.double.show-ranges.shown {
+    top: 55px !important;
+    left: unset !important;
+    right: 20px !important;
+} 
+
+
+.dropzone {
+	border: 2px dashed #ccc;
+	padding: 20px;
+	min-height: 200px;
+  }
+  
+  .dz-message {
+	text-align: center;
+  }
+  
+  .dz-message img {
+	width: 200px;
+	height: 200px;
+	margin-bottom: 10px;
+  }
+  
+  .preview-container {
+	display: flex;
+	flex-wrap: wrap;
+  }
+  
+  .file-preview {
+	margin: 10px;
+	position: relative;
+  }
+  
+  .remove-button {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	cursor: pointer;
+	background-color: #fff;
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	font-size: 16px;
+	line-height: 18px;
+	border: 1px solid #ccc;
+  }
+
+  .toast-top-center{
+    left: 40%;
+  }
+  
+
