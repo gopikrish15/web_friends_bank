@@ -18,10 +18,16 @@ export class MemberService {
     };
 
     public createMembers(obj: any): Observable<any> {
-        return this.http.post(this.resourceUrl + '/members', obj)
+        return this.http.post(`${this.resourceUrl}/members`, obj)
     }
     public getMembers(obj: any,): Observable<any> {
-        return this.http.get(this.resourceUrl + '/members', { params: obj })
+        return this.http.get(`${this.resourceUrl}/members`, { params: obj })
     }
+    public getMembersById(id?: any): Observable<any> {
+        return this.http.get(`${this.resourceUrl}/members/${id}`)
+    }
+    public updateMembers(id: any, obj: any): Observable<any> {
+		return this.http.put(`${this.resourceUrl}/members/${id}`, obj)
+	}
 
 }
