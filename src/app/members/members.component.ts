@@ -19,7 +19,6 @@ export class MembersComponent {
     mobile: '',
     date_of_birth: '',
     plan: ''
-
   };
 
   queryParams: any = {};
