@@ -39,6 +39,13 @@
                                     style="width: 100px;">Actions</th>
                             </tr>
                         </thead>
+                        <tbody *ngIf="totalCount === 0">
+                            <tr>
+                                <td colspan="6">
+                                    <h3 class="text-center mt-1">Data Not Found</h3>
+                                </td>
+                            </tr>
+                        </tbody>
                         <tbody *ngFor="let table of tableDataList; let i=index">
                             <tr>
                                 <td class="">

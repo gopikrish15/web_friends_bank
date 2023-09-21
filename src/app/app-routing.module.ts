@@ -1,8 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { LayoutComponent } from './layout/layout.component';
-import { MembersComponent } from './members/members.component';
+
 
 
 const routes: Routes = [{
@@ -19,6 +18,10 @@ const routes: Routes = [{
   {
     path: 'members',
     loadChildren: () => import('./members/member.module').then(m => m.MemberModule)
+  },
+  {
+    path: 'transactions',
+    loadChildren: () => import('./transaction/transaction.module').then(m => m.TransactionModule)
   }]
 },{
 	path: '**',

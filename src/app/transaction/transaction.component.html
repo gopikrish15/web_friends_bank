@@ -1,0 +1,143 @@
+<div class="page-header page-header_compress page-header-light shadow">
+    <div class="page-header-content d-lg-flex pt-2">
+        <div class="d-flex mx-2">
+            <div class="breadcrumb"><a href="/" class="breadcrumb-item"><i class="fa-solid fa-house"></i></a><span
+                    class="breadcrumb-item">Transactions</span>
+            </div>
+        </div>
+    </div>
+    <div class="page-header-content d-lg-flex border-top py-2 mx-2">
+        <div class="d-flex">
+            <h4 class="page-title mb-0"><span class="fw-normal">Transactions</span></h4>
+        </div>
+        <button type="button" class="btn btn-primary ms-auto me-2" (click)="openCreateModal(transactionBox,undefined)"><i
+                class="fa fa-plus"></i>Add</button>
+    </div>
+</div>
+
+<div class="row px-3 mt-4">
+    <div class="col">
+        <div class="card shadow">
+            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                <div class="datatable-scroll">
+                    <table class="table datatable-html no-footer" id="DataTables_Table_0"
+                        aria-describedby="DataTables_Table_0_info">
+                        <thead>
+                            <tr>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1">Name
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" aria-label="Position: activate to sort column ascending">Date
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" aria-label="Age: activate to sort column ascending">Amount
+                                </th>
+                                <th class="sorting sorting_desc" tabindex="0" aria-controls="DataTables_Table_0"
+                                    rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending"
+                                    aria-sort="descending">Payment Method
+                                </th>
+                                    <th class="sorting sorting_desc" tabindex="0" aria-controls="DataTables_Table_0"
+                                    rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending"
+                                    aria-sort="descending">Payment Status
+                                </th>
+                                    <th class="text-center sorting" rowspan="1" colspan="1" aria-label="Actions"
+                                    style="width: 100px;">Actions
+                                </th>
+                            </tr>
+                        </thead>
+                            <!-- <tbody>
+								<tr>
+									<td colspan="6">
+										<h3 class="text-center mt-1">Data Not Found</h3>
+									</td>
+								</tr>
+							</tbody> -->
+                            <tbody *ngFor="let table of tableDataList1; let i=index">
+                                <tr>
+                                    <td class="">
+                                        <div class="media-chat-item hstack align-items-start gap-3">
+                                            <div class="align-self-center">
+                                                <span style="font-weight: 500;">{{table.memberName}}
+                                                    </span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="">{{table.date}}</td>
+                                    <td class="">{{table.amount}}</td>
+                                    <td class="">{{table.payment_method}}</td>
+                                    <td class="">{{table.payment_status}}</td>
+
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary me-2" data-bs-original-title="Edit"
+                                                (click)="openCreateModal(modalBox,table?.['_id'])"><i
+                                                    class="ph-fill ph-pencil-simple"></i></button>
+                                            <button data-bs-toggle="modal"
+                                                (click)="deleteUserModal(deleteModal,table?.['_id'])" type="button"
+                                                class="btn btn-danger"><i class="ph-fill ph-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #transactionBox let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">{{id ? 'Update' : 'Create'}} Transactions</h5>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="transactionForm" (ngSubmit)="onFormSubmit()">
+            <div class="mb-3">
+                <div class="row g-2">
+                    <div class="col-sm-6 col-12">
+                        <label class="form-label">Member Name <span class="text-danger">*</span></label>
+                        <select class="form-select" formControlName="memberName" aria-label="Default select example">
+                            <option selected disabled>Select Member</option>
+                            <option *ngFor="let table of tableDataList" [value]="table.first_name">
+                                {{table?.first_name}}</option>
+                          </select>
+                    </div>
+                    <div class="col-sm-6 col-12">
+                        <label class="form-label">Date <span class="text-danger">*</span></label>
+                        <input type="date" class="form-control" formControlName="date"/>
+                    </div>
+                </div>
+                <div class="row mt-2 g-2">
+                    <div class="col-sm-6 col-12">
+                        <label class="form-label" for="amount">Amount <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" formControlName="amount" placeholder="Enter amount">
+                    </div>
+                    <div class="col-sm-6 col-12">
+                        <label class="form-label">Payment Method <span class="text-danger">*</span></label>
+                        <select class="form-select" formControlName="payment_method" aria-label="Default select example">
+                            <option selected>Select Method</option>
+                            <option value="1">One</option>
+                          </select>
+                    </div>
+                    <div class="col-sm-6 col-12 mt-2 g-2">
+                        <label for="address">Payment Status <span class="text-danger">*</span></label>
+                        <select class="form-select mt-2" formControlName="payment_status" aria-label="Default select example">
+                            <option selected>Select Status</option>
+                            <option value="1">One</option>
+                          </select>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn border-0 close-btn-color"
+                    (click)="modal.dismiss('Cross click')">Close</button>
+                <button type="submit" class="btn btn-primary">
+                    {{id ? 'Update' : 'Create'}}
+                </button>
+            </div>
+        </form>
+    </div>
+</ng-template>

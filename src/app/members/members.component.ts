@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { MemberService } from '../services/memberservice';
+import { MemberService } from '../services/member.service';
 import { ToastrService } from "ngx-toastr";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -24,8 +24,7 @@ export class MembersComponent {
   offset: number = 0;
   currentPage: number = 1;
   id: any;
-  entity: any;
-  isSubmitted: boolean;
+  isSubmitted: boolean = false;
   isUpdate: boolean;
 
 

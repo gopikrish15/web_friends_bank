@@ -26,12 +26,13 @@ export class SidebarComponent {
     },
     {
       number : '3',
-      name: 'Home',
-      icon: 'fa-solid fa-box'
+      name: 'Transactions',
+      icon: 'fa-solid fa-bank',
+      path: 'transactions'
     },
     {
       number : '4',
-      name: 'Order',
+      name: 'Notifications',
       icon: 'fa-solid fa-cart-shopping'
     },
     {
