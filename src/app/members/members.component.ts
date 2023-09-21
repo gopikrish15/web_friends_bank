@@ -92,6 +92,30 @@ export class MembersComponent {
     }
   }
 
+  deleteUserModal(modal: any, id: any) {
+    this.id = id;
+    this.modalService.open(modal, {
+      backdrop: "static",
+      keyboard: false,
+      centered: true,
+      size: "md",
+      windowClass: "modal-holder",
+    });
+  }
+
+  onDelete(){
+    this.memberService.deleteMembers(this.id).subscribe({
+      next:(res:any) => {
+        this.toastrService.success("Deleted", "Deleted successfully");
+        this.getMembers(this.queryParams);
+        this.modalService.dismissAll();
+      },
+      error: (error) => {
+        this.toastrService.error(error.error.message);
+      }
+    });
+  }
+
 
   resetForm(): void {
     this.memberForm.reset();

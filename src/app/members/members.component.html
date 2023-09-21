@@ -57,13 +57,11 @@
                                 <td class="">{{table.plan}}</td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <button style="border-radius: 0.4rem;" type="button"
+                                        <button  type="button"
                                             class="btn btn-primary me-2" data-bs-original-title="Edit"
                                             (click)="openCreateModal(modalBox,table?.['_id'])"><i
                                                 class="ph-fill ph-pencil-simple"></i></button>
-                                        <button style="border-radius: 0.4rem;" type="button"
-                                            class="btn btn-info me-2"><i class="ph-fill ph-eye"></i></button>
-                                        <button data-bs-toggle="modal" data-bs-target="#exampleModal" type="button"
+                                        <button data-bs-toggle="modal" (click)="deleteUserModal(deleteModal,table?.['_id'])" type="button"
                                             class="btn btn-danger"><i class="ph-fill ph-trash"></i></button>
 
                                     </div>
@@ -138,4 +136,18 @@
             </div>
         </form>
     </div>
+</ng-template>
+
+<ng-template #deleteModal let-modal>
+	<div class="modal-header bg-soft-danger">
+		<h5 class="modal-title mt-0">Confirm</h5>
+		<button type="button" class="btn-close" aria-hidden="true" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<p>Are you sure you want to delete ?</p>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn close-btn-color border-0" (click)="modal.dismiss('Cross click')">Close</button>
+		<button type="button" class="btn btn-danger" (click)="onDelete();modal.dismiss('Cross click')">Delete</button>
+	</div>
 </ng-template>

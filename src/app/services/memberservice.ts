@@ -29,5 +29,8 @@ export class MemberService {
     public updateMembers(id: any, obj: any): Observable<any> {
 		return this.http.put(`${this.resourceUrl}/members/${id}`, obj)
 	}
+    public deleteMembers(id: any): Observable<any> {
+		return this.http.delete(`${this.resourceUrl}/members/${id}`)
+	}
 
 }
