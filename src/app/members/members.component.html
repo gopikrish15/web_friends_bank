@@ -15,12 +15,9 @@
     </div>
 </div>
 
-<!-- Button trigger modal -->
-
-
 <div class="row px-3 mt-4">
     <div class="col">
-        <div class="card">
+        <div class="card shadow">
             <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
                 <div class="datatable-scroll">
                     <table class="table datatable-html no-footer" id="DataTables_Table_0"
@@ -47,7 +44,7 @@
                                 <td class="">
                                     <div class="media-chat-item hstack align-items-start gap-3">
                                         <div class="align-self-center">
-                                            <span class="fw-semibold">{{table.first_name}}
+                                            <span style="font-weight: 500;">{{table.first_name}}
                                                 {{table.last_name}}</span>
                                         </div>
                                     </div>
@@ -57,36 +54,38 @@
                                 <td class="">{{table.plan}}</td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <button  type="button"
-                                            class="btn btn-primary me-2" data-bs-original-title="Edit"
+                                        <button type="button" class="btn btn-primary me-2" data-bs-original-title="Edit"
                                             (click)="openCreateModal(modalBox,table?.['_id'])"><i
                                                 class="ph-fill ph-pencil-simple"></i></button>
-                                        <button data-bs-toggle="modal" (click)="deleteUserModal(deleteModal,table?.['_id'])" type="button"
+                                        <button data-bs-toggle="modal"
+                                            (click)="deleteUserModal(deleteModal,table?.['_id'])" type="button"
                                             class="btn btn-danger"><i class="ph-fill ph-trash"></i></button>
-
                                     </div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="datatable-footer">
-                    <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">
+                <div class="row">
+                    <div class="col-md-6 px-4 py-3" id="DataTables_Table_0_info" role="status" aria-live="polite">
                         Showing
                         {{page}} to
                         {{length}} of {{totalCount}}
                         entries</div>
-                    <pagination class="paginations d-flex justify-content-center ms-auto p-2 custom-pagination"
-                        [totalItems]="totalCount" (pageChanged)="loadPage($event)" [itemsPerPage]="limit" [rotate]=""
-                        [boundaryLinks]="true" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
-                        lastText="&raquo;" [maxSize]="limit" [(ngModel)]="currentPage"></pagination>
+                    <div class="col-md-6">
+                        <pagination class="paginations d-flex justify-content-center ms-auto p-2 custom-pagination"
+                            [totalItems]="totalCount" (pageChanged)="loadPage($event)" [itemsPerPage]="limit"
+                            [rotate]="" [boundaryLinks]="true" previousText="&lsaquo;" nextText="&rsaquo;"
+                            firstText="&laquo;" lastText="&raquo;" [maxSize]="limit" [(ngModel)]="currentPage">
+                        </pagination>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
+<!-- create modal -->
 <ng-template #modalBox let-modal>
     <div class="modal-header">
         <h5 class="modal-title">{{id ? 'Update' : 'Create'}} Members</h5>
@@ -102,14 +101,15 @@
                     </div>
                     <div *ngIf="memberForm.get('first_name').invalid && memberForm.get('first_name').touched">
                         First Name is required.
-                      </div>
+                    </div>
                     <div class="col-sm-6 col-12">
                         <label class="form-label">Last Name <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" formControlName="last_name" placeholder="Last Name">
                     </div>
                     <div class="col-sm-6 col-12">
                         <label class="form-label">Contact No <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control" formControlName="mobile" placeholder="Enter Mobile Number"/>
+                        <input type="number" class="form-control" formControlName="mobile"
+                            placeholder="Enter Mobile Number" />
                     </div>
                     <div class="col-sm-6 col-12">
                         <label class="form-label" for="email">Email <span class="text-danger">*</span></label>
@@ -123,31 +123,34 @@
                     </div>
                     <div class="col-sm-6 col-12">
                         <label for="address">Address <span class="text-danger">*</span></label>
-                        <textarea type="text" class="form-control" formControlName="address" placeholder="Enter Address">
+                        <textarea type="text" class="form-control" formControlName="address"
+                            placeholder="Enter Address">
 						</textarea>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn border-0 close-btn-color" (click)="modal.dismiss('Cross click')">Close</button>
+                <button type="button" class="btn border-0 close-btn-color"
+                    (click)="modal.dismiss('Cross click')">Close</button>
                 <button type="submit" class="btn btn-primary">
-                    {{id ? 'Update' : 'Create'}} 
+                    {{id ? 'Update' : 'Create'}}
                 </button>
             </div>
         </form>
     </div>
 </ng-template>
 
+<!-- Delete modal -->
 <ng-template #deleteModal let-modal>
-	<div class="modal-header bg-soft-danger">
-		<h5 class="modal-title mt-0">Confirm</h5>
-		<button type="button" class="btn-close" aria-hidden="true" (click)="modal.dismiss('Cross click')"></button>
-	</div>
-	<div class="modal-body">
-		<p>Are you sure you want to delete ?</p>
-	</div>
-	<div class="modal-footer">
-		<button type="button" class="btn close-btn-color border-0" (click)="modal.dismiss('Cross click')">Close</button>
-		<button type="button" class="btn btn-danger" (click)="onDelete();modal.dismiss('Cross click')">Delete</button>
-	</div>
+    <div class="modal-header bg-soft-danger">
+        <h5 class="modal-title mt-0">Confirm</h5>
+        <button type="button" class="btn-close" aria-hidden="true" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <p>Are you sure you want to delete ?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn close-btn-color border-0" (click)="modal.dismiss('Cross click')">Close</button>
+        <button type="button" class="btn btn-danger" (click)="onDelete();modal.dismiss('Cross click')">Delete</button>
+    </div>
 </ng-template>

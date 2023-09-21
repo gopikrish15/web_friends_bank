@@ -3,33 +3,38 @@
       <i class="fa-solid fa-bars"></i>
   </div>
   <a class="navbar-brand px-4" style="color: honeydew;" href="#">Friends Bank</a>
-  <div class="navbar-collapse">
-      <ul class="navbar-nav me-auto">
-          <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                  Menu 1
-              </a>
-              <ul class="dropdown-menu dropdown-menu-dark">
-                  <li><a class="dropdown-item" href="#">Child 1</a></li>
-                  <li><a class="dropdown-item" href="#">Child 2</a></li>
-                  <li><a class="dropdown-item" href="#">Child 3</a></li>
-              </ul>
-          </li>
-      </ul>
-  </div>
-  <form class="d-flex me-5">
-      <input class="form-control me-2" type="search" placeholder="search">
-      <button class="btn btn-outline-light" type="submit">Search</button>
-  </form>
-  <div class="profile-logo dropstart">
-      <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
-          Krish
-      </button>
-      <ul class="dropdown-menu dropdown-menu-dark">
-          <li><a class="dropdown-item">Sign up</a></li>
-          <li><a class="dropdown-item">Log In</a></li>
-          <li><a class="dropdown-item">Your Profile</a></li>
-          <li><a class="dropdown-item">Log out</a></li>
-      </ul>
+  <div class="profile-logo dropstart ms-auto me-2">
+    <ul class="nav flex-row justify-content-end order-1 order-lg-2">
+        <li class="nav-item nav-item-dropdown-lg dropdown ms-lg-2">
+            <a href="#" class="navbar-nav-link align-items-center rounded-pill p-1" data-bs-toggle="dropdown">
+            <div class="d-flex align-items-start">
+                <div class="status-indicator-container me-3">
+                    <img
+                    src="../../../assets/img/user.png" alt=""
+                    class="rounded-pill" style="width: 30px;">
+                    </div>
+
+                <div class="flex-fill mt-1">
+                    <div class="d-flex justify-content-between  align-items-center">
+                        <div class="fw-semibold text-white">Krish</div>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+            <div class="dropdown-menu dropdown-menu-end">
+                <a  class="dropdown-item">
+                    <i class="ph-user-circle me-2"></i>
+                    My profile
+                </a>
+                <div class="dropdown-divider"></div>
+                <a  class="dropdown-item cursor_pointer">
+                    <i class="ph-sign-out me-2"></i>
+                    Logout
+                </a>
+            </div>
+        </li>
+    </ul>
+
   </div>
 </nav>
