@@ -17,10 +17,9 @@ export class TransactionComponent {
   queryParams: any = {};
   tableDataList: any;
   page: number = 1;
-  totalCount: number = 0;
-  
+  totalCount1: number = 0;
   length: number = 10;
-  limit: number = 6;
+  limit: number = 5;
   offset: number = 0;
   currentPage: number = 1;
   id: any;
@@ -51,13 +50,14 @@ export class TransactionComponent {
     });
 
     this.getMembers(this.queryParams);
-    this.getAllTransactions(this.queryParams)
+    this.getAllTransactions(this.queryParams);
+    this.loadPage();
   }
 
   getAllTransactions(obj: any) {
     this.transactionservice.getAllTransactions(this.queryParams).subscribe(res => {
       this.tableDataList1 = res.transactions;
-      this.totalCount = res.totalCount;
+      this.totalCount1 = res.totalCount;
     },
       error => {
         console.log("data", error)
@@ -75,6 +75,9 @@ export class TransactionComponent {
             this.resetForm();
             this.modalService.dismissAll();
             this.toastrService.success('Success', "Updated Successfully", { closeButton: true });
+            setTimeout(() => {
+              window.location.reload();
+            }, 3000);
 
           }),
           error: (error) => {
@@ -82,7 +85,6 @@ export class TransactionComponent {
           }
         });
     } else {
-
     this.transactionservice.createTransaction(this.transactionForm.value).subscribe(
       (rsp) => {
         this.toastrService.success("Transaction Crearted Successfully");
@@ -124,14 +126,44 @@ export class TransactionComponent {
     }
   }
 
+  deleteUserModal(modal: any, id: any) {
+    this.id = id;
+    this.modalService.open(modal, {
+      backdrop: "static",
+      keyboard: false,
+      centered: false,
+      size: "md",
+      windowClass: "modal-holder",
+    });
+  }
+
+  onDelete(){
+    this.transactionservice.deleteTransactions(this.id).subscribe({
+      next:(res:any) => {
+        this.toastrService.success("Deleted", "Deleted successfully");
+        this.getAllTransactions(this.queryParams);
+        this.modalService.dismissAll();
+      },
+      error: (error) => {
+        this.toastrService.error(error.error.message);
+      }
+    });
+  }
+
   getMembers(obj: any) {
     this.memberService.getMembers(this.queryParams).subscribe(res => {
       this.tableDataList = res.members;
-      this.totalCount = res.totalCount;
     },
       error => {
         console.log("data", error)
       });
+  }
+
+  loadPage(page?: any) {
+    this.page = page.page? page.page : 1;
+    this.offset = (this.page - 1) * this.limit;
+    this.queryParams['offset'] = this.offset;
+    this.getAllTransactions(this.queryParams);
   }
 
 

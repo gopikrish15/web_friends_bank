@@ -11,7 +11,7 @@
             <h4 class="page-title mb-0"><span class="fw-normal">Transactions</span></h4>
         </div>
         <button type="button" class="btn btn-primary ms-auto me-2" (click)="openCreateModal(transactionBox,undefined)"><i
-                class="fa fa-plus"></i>Add</button>
+                class="fa fa-plus"></i> Add</button>
     </div>
 </div>
 
@@ -24,20 +24,20 @@
                         aria-describedby="DataTables_Table_0_info">
                         <thead>
                             <tr>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
-                                    colspan="1">Name
+                                <th class="sorting text-start" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1">Member Name
                                 </th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                <th class="sorting text-center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
                                     colspan="1" aria-label="Position: activate to sort column ascending">Date
                                 </th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                <th class="sorting text-center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
                                     colspan="1" aria-label="Age: activate to sort column ascending">Amount
                                 </th>
-                                <th class="sorting sorting_desc" tabindex="0" aria-controls="DataTables_Table_0"
+                                <th class="sorting text-center" tabindex="0" aria-controls="DataTables_Table_0"
                                     rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending"
                                     aria-sort="descending">Payment Method
                                 </th>
-                                    <th class="sorting sorting_desc" tabindex="0" aria-controls="DataTables_Table_0"
+                                    <th class="sorting text-center" tabindex="0" aria-controls="DataTables_Table_0"
                                     rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending"
                                     aria-sort="descending">Payment Status
                                 </th>
@@ -46,41 +46,60 @@
                                 </th>
                             </tr>
                         </thead>
-                            <!-- <tbody>
+                            <tbody *ngIf="totalCount1 === 0">
 								<tr>
 									<td colspan="6">
 										<h3 class="text-center mt-1">Data Not Found</h3>
 									</td>
 								</tr>
-							</tbody> -->
+							</tbody>
                             <tbody *ngFor="let table of tableDataList1; let i=index">
                                 <tr>
-                                    <td class="">
-                                        <div class="media-chat-item hstack align-items-start gap-3">
-                                            <div class="align-self-center">
+                                    <td class="text-start">
                                                 <span style="font-weight: 500;">{{table.memberName}}
                                                     </span>
-                                            </div>
-                                        </div>
                                     </td>
-                                    <td class="">{{table.date}}</td>
-                                    <td class="">{{table.amount}}</td>
-                                    <td class="">{{table.payment_method}}</td>
-                                    <td class="">{{table.payment_status}}</td>
-
                                     <td class="text-center">
+                                        <ul>
+                                            <span><i class="fa fa-user-circle" aria-hidden="true"></i>
+                                                {{table.date | date: 'dd-MM-YYYY'}}
+                                            </span><br>
+                                            <span><i class="fa fa-check success" style="color: green" aria-hidden="true"></i>
+                                                {{table.updatedAt | date:'dd-MM-YYYY'}}
+                                            </span>
+                                        </ul>
+                                    </td>
+                                    <td class="text-center">{{table.amount}}</td>
+                                    <td class="text-center">{{table.payment_method}}</td>
+                                    <td class="text-center">{{table.payment_status}}</td>
+
+                                    <td class="text-start">
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-primary me-2" data-bs-original-title="Edit"
-                                                (click)="openCreateModal(modalBox,table?.['_id'])"><i
+                                                (click)="openCreateModal(transactionBox,table?.['_id'])"><i
                                                     class="ph-fill ph-pencil-simple"></i></button>
                                             <button data-bs-toggle="modal"
                                                 (click)="deleteUserModal(deleteModal,table?.['_id'])" type="button"
-                                                class="btn btn-danger"><i class="ph-fill ph-trash"></i></button>
+                                                class="btn btn-danger me-2"><i class="ph-fill ph-trash"></i></button>
                                         </div>
                                     </td>
                                 </tr>
                             </tbody>
                     </table>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 px-4 py-3" id="DataTables_Table_0_info" role="status" aria-live="polite">
+                        Showing
+                        {{page}} to
+                        {{length}} of {{totalCount1}}
+                        entries</div>
+                    <div class="col-md-6">
+                        <pagination class="paginations d-flex justify-content-center ms-auto p-2 custom-pagination"
+                            [totalItems]="totalCount1" (pageChanged)="loadPage($event)" [itemsPerPage]="limit"
+                            [rotate]="" [boundaryLinks]="true" previousText="&lsaquo;" nextText="&rsaquo;"
+                            firstText="&laquo;" lastText="&raquo;" [maxSize]="limit" [(ngModel)]="currentPage">
+                        </pagination>
+                    </div>
                 </div>
             </div>
         </div>
@@ -99,9 +118,9 @@
                     <div class="col-sm-6 col-12">
                         <label class="form-label">Member Name <span class="text-danger">*</span></label>
                         <select class="form-select" formControlName="memberName" aria-label="Default select example">
-                            <option selected disabled>Select Member</option>
-                            <option *ngFor="let table of tableDataList" [value]="table.first_name">
-                                {{table?.first_name}}</option>
+                            <option value="null" disabled selected>Select Member</option>
+                            <option *ngFor="let table of tableDataList" [value]="table.member_name">
+                                {{table?.member_name}}</option>
                           </select>
                     </div>
                     <div class="col-sm-6 col-12">
@@ -117,15 +136,17 @@
                     <div class="col-sm-6 col-12">
                         <label class="form-label">Payment Method <span class="text-danger">*</span></label>
                         <select class="form-select" formControlName="payment_method" aria-label="Default select example">
-                            <option selected>Select Method</option>
-                            <option value="1">One</option>
+                            <option value="null" disabled selected>Select Method</option>
+                            <option value="Upi">Upi</option>
+                            <option value="Cash">Cash</option>
                           </select>
                     </div>
                     <div class="col-sm-6 col-12 mt-2 g-2">
                         <label for="address">Payment Status <span class="text-danger">*</span></label>
                         <select class="form-select mt-2" formControlName="payment_status" aria-label="Default select example">
-                            <option selected>Select Status</option>
-                            <option value="1">One</option>
+                            <option value="null" disabled selected>Select Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Received">Received</option>
                           </select>
                     </div>
                 </div>
@@ -139,5 +160,20 @@
                 </button>
             </div>
         </form>
+    </div>
+</ng-template>
+
+<!-- Delete modal -->
+<ng-template #deleteModal let-modal>
+    <div class="modal-header bg-soft-danger">
+        <h5 class="modal-title mt-0">Confirm</h5>
+        <button type="button" class="btn-close" aria-hidden="true" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <p>Are you sure you want to delete ?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn close-btn-color border-0" (click)="modal.dismiss('Cross click')">Close</button>
+        <button type="button" class="btn btn-danger" (click)="onDelete();modal.dismiss('Cross click')">Delete</button>
     </div>
 </ng-template>

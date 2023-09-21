@@ -11,7 +11,7 @@
             <h4 class="page-title mb-0"><span class="fw-normal">Members</span></h4>
         </div>
         <button type="button" class="btn btn-primary ms-auto me-2" (click)="openCreateModal(modalBox,undefined)"><i
-                class="fa fa-plus"></i>Add</button>
+                class="fa fa-plus"></i> Add</button>
     </div>
 </div>
 
@@ -51,8 +51,8 @@
                                 <td class="">
                                     <div class="media-chat-item hstack align-items-start gap-3">
                                         <div class="align-self-center">
-                                            <span style="font-weight: 500;">{{table.first_name}}
-                                                {{table.last_name}}</span>
+                                            <span style="font-weight: 500;">{{table.member_name}}
+                                               </span>
                                         </div>
                                     </div>
                                 </td>
@@ -103,32 +103,28 @@
             <div class="mb-3">
                 <div class="row g-2">
                     <div class="col-sm-6 col-12">
-                        <label class="form-label">First Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" formControlName="first_name" placeholder="First Name">
+                        <label class="form-label">Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="member_name" placeholder="Member Name">
                     </div>
-                    <div *ngIf="memberForm.get('first_name').invalid && memberForm.get('first_name').touched">
-                        First Name is required.
-                    </div>
-                    <div class="col-sm-6 col-12">
-                        <label class="form-label">Last Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" formControlName="last_name" placeholder="Last Name">
+                    <div *ngIf="memberForm.get('member_name').invalid && memberForm.get('member_name').touched">
+                         Name is required.
                     </div>
                     <div class="col-sm-6 col-12">
                         <label class="form-label">Contact No <span class="text-danger">*</span></label>
                         <input type="number" class="form-control" formControlName="mobile"
                             placeholder="Enter Mobile Number" />
                     </div>
+                </div>
+                <div class="row mt-2 g-2">
                     <div class="col-sm-6 col-12">
                         <label class="form-label" for="email">Email <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" formControlName="email" placeholder="Enter Email">
                     </div>
-                </div>
-                <div class="row mt-2 g-2">
                     <div class="col-sm-6 col-12">
                         <label class="form-label">Plan <span class="text-danger">*</span></label>
                         <input type="number" class="form-control" formControlName="plan" placeholder="Enter Plan">
                     </div>
-                    <div class="col-sm-6 col-12">
+                    <div class="col-sm-12 col-12">
                         <label for="address">Address <span class="text-danger">*</span></label>
                         <textarea type="text" class="form-control" formControlName="address"
                             placeholder="Enter Address">

@@ -18,7 +18,6 @@ export class MembersComponent {
   tableDataList: any;
   page: number = 1;
   totalCount: number = 0;
-  
   length: number = 10;
   limit: number = 5;
   offset: number = 0;
@@ -43,8 +42,7 @@ export class MembersComponent {
 
   ngOnInit(): void {
     this.memberForm = this.fb.group({
-      first_name: ['', Validators.required],
-      last_name: [''],
+      member_name: [''],
       email: ['', [Validators.required, Validators.email]],
       mobile: ['', Validators.required],
       address: [''],
@@ -143,8 +141,6 @@ export class MembersComponent {
     this.memberService.createMembers(this.memberForm.value).subscribe(
       (rsp) => {
         this.toastrService.success("Member Profile Crearted Successfully");
-        const formValues = this.memberForm.getRawValue();
-        const jsonData = JSON.stringify(formValues);
         setTimeout(() => {
           window.location.reload();
         }, 3000);
