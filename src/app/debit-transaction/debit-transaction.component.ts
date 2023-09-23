@@ -1,23 +1,25 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { TransactionService } from '../services/transaction.service';
-import { MemberService } from '../services/member.service';
+import { MemberService } from 'src/app/services/member.service';
+import { TransactionService } from 'src/app/services/transaction.service';
+import { DebitService } from '../services/debit.service';
 
 @Component({
-  selector: 'app-transaction',
-  templateUrl: './transaction.component.html',
-  styleUrls: ['./transaction.component.scss']
+  selector: 'app-debit-transaction',
+  templateUrl: './debit-transaction.component.html',
+  styleUrls: ['./debit-transaction.component.scss']
 })
-export class TransactionComponent {
+export class DebitTransactionComponent {
 
-  transactionForm: FormGroup;
+
+  debitForm: FormGroup;
   queryParams: any = {};
   tableDataList: any;
   page: number = 1;
-  totalCount1: number = 0;
+  totalCount2: number = 0;
   length: number = 10;
   limit: number = 5;
   offset: number = 0;
@@ -25,8 +27,8 @@ export class TransactionComponent {
   id: any;
   isSubmitted: boolean = false;
   isUpdate: boolean;
-  tableDataList1: any;
-  totalCreditAmount: any;
+  tableDataList2: any;
+  totalDebitAmount: any;
 
   constructor(
     private router: Router,
@@ -34,7 +36,8 @@ export class TransactionComponent {
     private toastrService: ToastrService,
     private modalService: NgbModal,
     private transactionservice: TransactionService,
-    private memberService: MemberService
+    private memberService: MemberService,
+    private debitService: DebitService
 
   ) { this.queryParams = {
     offset: this.offset,
@@ -42,7 +45,7 @@ export class TransactionComponent {
   }}
 
   ngOnInit(): void {
-    this.transactionForm = this.fb.group({
+    this.debitForm = this.fb.group({
       memberName: [''],
       date: [''],
       amount: [''],
@@ -52,15 +55,21 @@ export class TransactionComponent {
     });
 
     this.getMembers(this.queryParams);
-    this.getAllTransactions(this.queryParams);
+    this.getAllDebits(this.queryParams);
     this.loadPage();
   }
 
-  getAllTransactions(obj: any) {
-    this.transactionservice.getAllTransactions(this.queryParams).subscribe(res => {
-      this.tableDataList1 = res.transactions;
-      this.totalCount1 = res.totalCount;
-      this.totalCreditAmount = res.totalAmount;
+  getAllDebits(obj: any) {
+    this.debitService.getAllDebits(this.queryParams).subscribe(res => {
+      this.tableDataList2 = res.debits;
+      this.totalDebitAmount = 0;
+
+    for (const debit of this.tableDataList2) {
+      if (debit.payment_type === 'received') {
+          this.totalDebitAmount += debit.amount;
+      }
+    }
+      this.totalCount2 = res.totalCount;
     },
       error => {
         console.log("data", error)
@@ -70,10 +79,10 @@ export class TransactionComponent {
   onFormSubmit() {
     this.modalService.dismissAll();
     if (this.id) {
-      this.transactionservice.updateTransaction(this.id, this.transactionForm.value)
+      this.debitService.updateDebit(this.id, this.debitForm.value)
         .subscribe({
           next: ((result) => {
-            this.getAllTransactions(this.queryParams);
+            this.getAllDebits(this.queryParams);
             this.isSubmitted = false;
             this.resetForm();
             this.modalService.dismissAll();
@@ -88,7 +97,7 @@ export class TransactionComponent {
           }
         });
     } else {
-    this.transactionservice.createTransaction(this.transactionForm.value).subscribe(
+    this.debitService.createDebit(this.debitForm.value).subscribe(
       (rsp) => {
         this.toastrService.success("Transaction Crearted Successfully");
         setTimeout(() => {
@@ -102,15 +111,15 @@ export class TransactionComponent {
   }
 
   resetForm(): void {
-    this.transactionForm.reset();
+    this.debitForm.reset();
   }
 
-  openCreateModal(transactionBox: any, id: any) {
+  openCreateModal(debitBox: any, id: any) {
     this.id = undefined;
     this.isUpdate = false;
     this.isSubmitted = false;
     this.resetForm();
-    this.modalService.open(transactionBox, {
+    this.modalService.open(debitBox, {
       backdrop: 'static',
       keyboard: false,
       centered: true,
@@ -121,9 +130,9 @@ export class TransactionComponent {
     if (id) {
       this.id = id;
       this.isUpdate = true;
-      this.transactionservice.getTransactionById(id).subscribe({
+      this.debitService.getDebitById(id).subscribe({
         next: (result) => {
-          this.transactionForm.patchValue(result);
+          this.debitForm.patchValue(result);
         }
       });
     }
@@ -141,10 +150,10 @@ export class TransactionComponent {
   }
 
   onDelete(){
-    this.transactionservice.deleteTransactions(this.id).subscribe({
+    this.debitService.deleteDebits(this.id).subscribe({
       next:(res:any) => {
         this.toastrService.success("Deleted", "Deleted successfully");
-        this.getAllTransactions(this.queryParams);
+        this.getAllDebits(this.queryParams);
         this.modalService.dismissAll();
       },
       error: (error) => {
@@ -166,9 +175,7 @@ export class TransactionComponent {
     this.page = page.page? page.page : 1;
     this.offset = (this.page - 1) * this.limit;
     this.queryParams['offset'] = this.offset;
-    this.getAllTransactions(this.queryParams);
+    this.getAllDebits(this.queryParams);
   }
-
-
 
 }

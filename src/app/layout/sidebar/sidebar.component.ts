@@ -26,9 +26,17 @@ export class SidebarComponent {
     },
     {
       number : '3',
-      name: 'Transactions',
-      icon: 'fa-solid fa-bank',
+      name: 'Credit Transaction',
+      icon: 'fa-regular fa-credit-card',
       path: 'transactions'
+      
+    },
+    {
+      number : '3',
+      name: 'Debit Transaction',
+      icon: 'fa-brands fa-cc-amazon-pay',
+      path: 'debitTransaction'
+      
     },
     {
       number : '4',
@@ -41,5 +49,9 @@ export class SidebarComponent {
       icon: 'fa-solid fa-gear'
     }
   ]
+
+  toggleSubmenu(item: any): void {
+    item.submenuOpen = !item.submenuOpen;
+  }
 
 }

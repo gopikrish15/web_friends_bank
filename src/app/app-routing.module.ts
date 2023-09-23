@@ -22,6 +22,10 @@ const routes: Routes = [{
   {
     path: 'transactions',
     loadChildren: () => import('./transaction/transaction.module').then(m => m.TransactionModule)
+  },
+  {
+    path: 'debitTransaction',
+    loadChildren: () => import('./debit-transaction/debit.module').then(m => m.DebitModule)
   }]
 },{
 	path: '**',

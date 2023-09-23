@@ -2,17 +2,17 @@
     <div class="page-header-content d-lg-flex pt-2">
         <div class="d-flex mx-2">
             <div class="breadcrumb"><a href="/" class="breadcrumb-item"><i class="fa-solid fa-house"></i></a><span
-                    class="breadcrumb-item">Credit Transactions</span>
+                    class="breadcrumb-item">Debit Transactions</span>
             </div>
         </div>
     </div>
     <div class="page-header-content d-lg-flex border-top py-2 mx-2">
         <div class="d-flex">
-            <h4 class="page-title mb-0"><span class="fw-normal">Credit Transactions</span></h4>
+            <h4 class="page-title mb-0"><span class="fw-normal">Debit Transactions</span></h4>
         </div>
-        <div  class="bg-success text-white rounded ms-auto me-3 p-2"><i class="fa-brands fa-slack"></i> Total Credit Amount :
-            {{totalCreditAmount}}</div>
-        <button type="button" class="btn btn-primary me-2" (click)="openCreateModal(transactionBox,undefined)"><i
+        <div  class="bg-danger text-white rounded ms-auto me-3 p-2"><i class="fa-solid fa-calendar-days"></i> Total Debit Amount :
+            {{totalDebitAmount}}</div>
+        <button type="button" class="btn btn-primary me-2" (click)="openCreateModal(debitBox,undefined)"><i
                 class="fa fa-plus"></i> Add</button>
     </div>
 </div>
@@ -52,14 +52,14 @@
                                 </th>
                             </tr>
                         </thead>
-                            <tbody *ngIf="totalCount1 === 0">
+                            <tbody *ngIf="totalCount2 === 0">
 								<tr>
 									<td colspan="6">
 										<h3 class="text-center mt-1">Data Not Found</h3>
 									</td>
 								</tr>
 							</tbody>
-                            <tbody *ngFor="let table of tableDataList1; let i=index">
+                            <tbody *ngFor="let table of tableDataList2; let i=index">
                                 <tr>
                                     <td class="text-start">
                                                 <span style="font-weight: 500;">{{table.memberName}}
@@ -83,7 +83,7 @@
                                     <td class="text-start">
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-primary me-2" data-bs-original-title="Edit"
-                                                (click)="openCreateModal(transactionBox,table?.['_id'])"><i
+                                                (click)="openCreateModal(debitBox,table?.['_id'])"><i
                                                     class="ph-fill ph-pencil-simple"></i></button>
                                             <button data-bs-toggle="modal"
                                                 (click)="deleteUserModal(deleteModal,table?.['_id'])" type="button"
@@ -98,11 +98,11 @@
                     <div class="col-md-6 px-4 py-3" id="DataTables_Table_0_info" role="status" aria-live="polite">
                         Showing
                         {{page}} to
-                        {{length}} of {{totalCount1}}
+                        {{length}} of {{totalCount2}}
                         entries</div>
                     <div class="col-md-6">
                         <pagination class="paginations d-flex justify-content-center ms-auto p-2 custom-pagination"
-                            [totalItems]="totalCount1" (pageChanged)="loadPage($event)" [itemsPerPage]="limit"
+                            [totalItems]="totalCount2" (pageChanged)="loadPage($event)" [itemsPerPage]="limit"
                             [rotate]="" [boundaryLinks]="true" previousText="&lsaquo;" nextText="&rsaquo;"
                             firstText="&laquo;" lastText="&raquo;" [maxSize]="limit" [(ngModel)]="currentPage">
                         </pagination>
@@ -113,13 +113,13 @@
     </div>
 </div>
 
-<ng-template #transactionBox let-modal>
+<ng-template #debitBox let-modal>
     <div class="modal-header">
-        <h5 class="modal-title">{{id ? 'Update' : 'Create'}} Transactions</h5>
+        <h5 class="modal-title">{{id ? 'Update' : 'Create'}} Debits</h5>
         <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <form [formGroup]="transactionForm" (ngSubmit)="onFormSubmit()">
+        <form [formGroup]="debitForm" (ngSubmit)="onFormSubmit()">
             <div class="mb-3">
                 <div class="row g-2">
                     <div class="col-sm-6 col-12">
@@ -192,3 +192,4 @@
         <button type="button" class="btn btn-danger" (click)="onDelete();modal.dismiss('Cross click')">Delete</button>
     </div>
 </ng-template>
+
