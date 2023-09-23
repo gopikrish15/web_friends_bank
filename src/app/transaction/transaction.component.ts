@@ -19,7 +19,7 @@ export class TransactionComponent {
   page: number = 1;
   totalCount1: number = 0;
   length: number = 10;
-  limit: number = 4;
+  limit: number = 5;
   offset: number = 0;
   currentPage: number = 1;
   id: any;

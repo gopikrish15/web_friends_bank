@@ -70,12 +70,12 @@
                                     </td>
                                     <td class="text-center">
                                             <span><i class="fa fa-user-circle" aria-hidden="true"></i>
-                                                {{table.date | date: 'dd-MM-YYYY'}}
+                                                {{table.date | date: 'dd-MMM(MM)-YYYY'}}
                                             </span>
                                     </td>
                                     <td class="text-center">
                                         <span><i class="fa fa-check success" style="color: green" aria-hidden="true"></i>
-                                            {{table.updatedAt | date:'dd-MM-YYYY'}}
+                                            {{table.updatedAt | date: 'dd-MMM(MM)-YYYY'}}
                                         </span>
                                     </td>
                                     <td class="text-center">{{table.amount}}</td>
