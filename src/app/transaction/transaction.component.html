@@ -34,9 +34,12 @@
                                 </th>
                                 <th class="sorting text-center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
                                 colspan="1" aria-label="Position: activate to sort column ascending">Update Date
-                            </th>
+                                </th>
                                 <th class="sorting text-center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
                                     colspan="1" aria-label="Age: activate to sort column ascending">Amount
+                                </th>
+                                <th class="sorting text-center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" aria-label="Age: activate to sort column ascending">Interest
                                 </th>
                                 <th class="sorting text-center" tabindex="0" aria-controls="DataTables_Table_0"
                                     rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending"
@@ -57,7 +60,7 @@
                         </thead>
                             <tbody *ngIf="totalCount1 === 0">
 								<tr>
-									<td colspan="6">
+									<td colspan="12">
 										<h3 class="text-center mt-1">Data Not Found</h3>
 									</td>
 								</tr>
@@ -79,6 +82,7 @@
                                         </span>
                                     </td>
                                     <td class="text-center">{{table.amount}}</td>
+                                    <td class="text-center">{{table.interest}}</td>
                                     <td class="text-center">{{table.payment_method}}</td>
                                     <td class="text-center">{{table.payment_type}}</td>
                                     <td class="text-center">{{table.payment_status}}</td>

@@ -26,7 +26,9 @@ export class TransactionComponent {
   isSubmitted: boolean = false;
   isUpdate: boolean;
   tableDataList1: any;
-  totalCreditAmount: any;
+  totalCreditAmount: any; 
+  route: any;
+  transaction: any;
 
   constructor(
     private router: Router,
@@ -60,7 +62,7 @@ export class TransactionComponent {
     this.transactionservice.getAllTransactions(this.queryParams).subscribe(res => {
       this.tableDataList1 = res.transactions;
       this.totalCount1 = res.totalCount;
-      this.totalCreditAmount = res.totalAmount;
+      this.totalCreditAmount = res.totalAmount
     },
       error => {
         console.log("data", error)
