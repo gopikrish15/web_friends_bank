@@ -30,7 +30,10 @@
                                     colspan="1">Member Name
                                 </th>
                                 <th class="sorting text-center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
-                                    colspan="1" aria-label="Position: activate to sort column ascending">Date
+                                    colspan="1" aria-label="Position: activate to sort column ascending">Debit Date
+                                </th>
+                                <th class="sorting text-center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                                    colspan="1" aria-label="Position: activate to sort column ascending">Update Date
                                 </th>
                                 <th class="sorting text-center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
                                     colspan="1" aria-label="Age: activate to sort column ascending">Amount
@@ -42,10 +45,6 @@
                                     <th class="sorting text-center" tabindex="0" aria-controls="DataTables_Table_0"
                                     rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending"
                                     aria-sort="descending">Payment Status
-                                </th>
-                                <th class="sorting text-center" tabindex="0" aria-controls="DataTables_Table_0"
-                                    rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending"
-                                    aria-sort="descending">Payment Type
                                 </th>
                                     <th class="text-center sorting" rowspan="1" colspan="1" aria-label="Actions"
                                     style="width: 100px;">Actions
@@ -66,18 +65,17 @@
                                                     </span>
                                     </td>
                                     <td class="text-center">
-                                        <ul>
                                             <span><i class="fa fa-user-circle" aria-hidden="true"></i>
                                                 {{table.date | date: 'dd-MM-YYYY'}}
-                                            </span><br>
-                                            <span><i class="fa fa-check success" style="color: green" aria-hidden="true"></i>
-                                                {{table.updatedAt | date:'dd-MM-YYYY'}}
                                             </span>
-                                        </ul>
+                                    </td>
+                                    <td class="text-center">
+                                        <span><i class="fa fa-check success" style="color: green" aria-hidden="true"></i>
+                                            {{table.updatedAt | date:'dd-MM-YYYY'}}
+                                        </span>
                                     </td>
                                     <td class="text-center">{{table.amount}}</td>
                                     <td class="text-center">{{table.payment_method}}</td>
-                                    <td class="text-center">{{table.payment_type}}</td>
                                     <td class="text-center">{{table.payment_status}}</td>
                             
                                     <td class="text-start">
@@ -140,6 +138,14 @@
                         <label class="form-label" for="amount">Amount <span class="text-danger">*</span></label>
                         <input type="number" class="form-control" formControlName="amount" placeholder="Enter amount">
                     </div>
+                    <div class="col-sm-6 col-12 mt-2 g-2">
+                        <label for="payment_status">Payment Status <span class="text-danger">*</span></label>
+                        <select class="form-select mt-2" formControlName="payment_status" aria-label="Default select example">
+                            <option value="null" disabled selected>Select Status</option>
+                            <option value="Credit">Credit</option>
+                            <option value="Debit">Debit</option>
+                          </select>
+                    </div>
                     <div class="col-sm-6 col-12">
                         <label class="form-label">Payment Method <span class="text-danger">*</span></label>
                         <select class="form-select" formControlName="payment_method" aria-label="Default select example">
@@ -148,27 +154,12 @@
                             <option value="Cash">Cash</option>
                           </select>
                     </div>
-                    <div class="col-sm-6 col-12 mt-2 g-2">
-                        <label for="payment_status">Payment Status <span class="text-danger">*</span></label>
-                        <select class="form-select mt-2" formControlName="payment_status" aria-label="Default select example">
-                            <option value="null" disabled selected>Select Status</option>
-                            <option value="Pending">Pending</option>
-                            <option value="Received">Received</option>
-                          </select>
-                    </div>
-                    <div class="col-sm-6 col-12 mt-2 g-2">
-                        <label for="payment_type">Payment Type <span class="text-danger">*</span></label>
-                        <select class="form-select mt-2" formControlName="payment_type" aria-label="Default select example">
-                            <option value="null" disabled selected>Select Type</option>
-                            <option value="Credit">Credit</option>
-                            <option value="Debit">Debit</option>
-                          </select>
-                    </div>
+                    
                 </div>
                 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn border-0 close-btn-color"
+                <button type="button" class="btn btn-danger"
                     (click)="modal.dismiss('Cross click')">Close</button>
                 <button type="submit" class="btn btn-primary">
                     {{id ? 'Update' : 'Create'}}

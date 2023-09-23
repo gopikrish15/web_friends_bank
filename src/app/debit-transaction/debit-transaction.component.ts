@@ -51,7 +51,6 @@ export class DebitTransactionComponent {
       amount: [''],
       payment_method: [''],
       payment_status: [''],
-      payment_type: [''],
     });
 
     this.getMembers(this.queryParams);
@@ -62,13 +61,7 @@ export class DebitTransactionComponent {
   getAllDebits(obj: any) {
     this.debitService.getAllDebits(this.queryParams).subscribe(res => {
       this.tableDataList2 = res.debits;
-      this.totalDebitAmount = 0;
-
-    for (const debit of this.tableDataList2) {
-      if (debit.payment_type === 'received') {
-          this.totalDebitAmount += debit.amount;
-      }
-    }
+      this.totalDebitAmount = res.totalAmount;
       this.totalCount2 = res.totalCount;
     },
       error => {
