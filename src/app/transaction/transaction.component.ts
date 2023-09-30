@@ -62,7 +62,17 @@ export class TransactionComponent {
     this.transactionservice.getAllTransactions(this.queryParams).subscribe(res => {
       this.tableDataList1 = res.transactions;
       this.totalCount1 = res.totalCount;
-      this.totalCreditAmount = res.totalAmount
+      this.totalCreditAmount = res.totalAmount;
+
+      // res.transactions.forEach((transaction) => {
+      //   if (transaction.payment_status === 'Pending') {
+      //     const createdDateTime = new Date(transaction.createdAt);
+      //     const delay = 120000;
+      //     setTimeout(() => {
+      //       transaction.penalty += 100;
+      //     }, createdDateTime.getTime() + delay - Date.now());
+      //   }
+      // });
     },
       error => {
         console.log("data", error)

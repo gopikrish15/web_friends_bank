@@ -38,21 +38,19 @@
                                 <th class="sorting text-center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
                                     colspan="1" aria-label="Age: activate to sort column ascending">Amount
                                 </th>
-                                <th class="sorting text-center" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
-                                    colspan="1" aria-label="Age: activate to sort column ascending">Interest
-                                </th>
                                 <th class="sorting text-center" tabindex="0" aria-controls="DataTables_Table_0"
                                     rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending"
                                     aria-sort="descending">Payment Method
+                                </th>
+                                <th class="sorting text-center" tabindex="0" aria-controls="DataTables_Table_0"
+                                rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending"
+                                aria-sort="descending">Payment Type
                                 </th>
                                     <th class="sorting text-center" tabindex="0" aria-controls="DataTables_Table_0"
                                     rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending"
                                     aria-sort="descending">Payment Status
                                 </th>
-                                <th class="sorting text-center" tabindex="0" aria-controls="DataTables_Table_0"
-                                    rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending"
-                                    aria-sort="descending">Payment Type
-                                </th>
+                             
                                     <th class="text-center sorting" rowspan="1" colspan="1" aria-label="Actions"
                                     style="width: 100px;">Actions
                                 </th>
@@ -81,8 +79,7 @@
                                             {{table.updatedAt | date: 'dd-MMM(MM)-YYYY'}}
                                         </span>
                                     </td>
-                                    <td class="text-center">{{table.amount}}</td>
-                                    <td class="text-center">{{table.interest}}</td>
+                                    <td class="text-center">{{table.amount}} {{table.penalty}}</td>
                                     <td class="text-center">{{table.payment_method}}</td>
                                     <td class="text-center">{{table.payment_type}}</td>
                                     <td class="text-center">{{table.payment_status}}</td>

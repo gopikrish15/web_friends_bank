@@ -14,7 +14,7 @@ main {
 }
 
 app-sidebar {
-    position: absolute;
+    position: fixed;
     left: 0px !important;
     width: 60px;
     height: calc(100vh - 4rem);
@@ -40,4 +40,5 @@ app-sidebar {
 .display-area-shrink {
     width: calc(100% - 220px);
     left: 220px;
+   overflow-x: hidden;
 }
